@@ -6,6 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public Player player;
+    public Player2 player2;
     public ParticleSystem explosion;
     public GameObject gameOverUI;
 
@@ -49,6 +50,12 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = Vector3.zero;
         player.gameObject.SetActive(true);
+        
+    }
+    public void Respawn2()
+    {
+        player2.transform.position = Vector3.zero;
+        player2.gameObject.SetActive(true);
     }
 
     public void AsteroidDestroyed(Asteroid asteroid)
@@ -84,6 +91,22 @@ public class GameManager : MonoBehaviour
         else
         {
             Invoke(nameof(Respawn), this.respawnTime);
+        }
+    }
+    public void Player2Death(Player2 player2)
+    {
+        explosion.transform.position = player2.transform.position;
+        explosion.Play();
+
+        SetLives(lives - 1);
+
+        if (lives <= 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            Invoke(nameof(Respawn2), this.respawnTime);
         }
     }
 

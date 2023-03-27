@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class Player2 : MonoBehaviour
 {
     public new Rigidbody2D rigidbody { get; private set; }
     public Bullet bulletPrefab;
@@ -28,13 +28,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        thrusting = Input.GetKey(KeyCode.W) ;
+        thrusting = Input.GetKey(KeyCode.UpArrow);
 
-        if (Input.GetKey(KeyCode.A) )
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             turnDirection = 1f;
         }
-        else if (Input.GetKey(KeyCode.D) )
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             turnDirection = -1f;
         }
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
             turnDirection = 0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) )
+        if ( Input.GetMouseButtonDown(0))
         {
             Shoot();
         }
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
             rigidbody.angularVelocity = 0f;
             gameObject.SetActive(false);
 
-            FindObjectOfType<GameManager>().PlayerDeath(this);
+            FindObjectOfType<GameManager>().Player2Death(this);
         }
     }
 
